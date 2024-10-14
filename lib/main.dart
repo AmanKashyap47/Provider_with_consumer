@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    print("this build function is called");
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -39,10 +40,17 @@ class MyHomePage extends StatelessWidget {
             const Text(
               'You have pushed the button this many times:',
             ),
-            Text(
+            Consumer<CounterProvider>(builder: (ctx, provider, _) {
+              print("consumer build function is called");
+              return Text(
+                '${Provider.of<CounterProvider>(ctx).getCountValue()}',
+                style: Theme.of(context).textTheme.headlineMedium,
+              );
+            }),
+
+            /* Text(
               '${Provider.of<CounterProvider>(context).getCountValue()}',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+              style: Theme.of(context).textTheme.headlineMedium,*/
           ],
         ),
       ),
